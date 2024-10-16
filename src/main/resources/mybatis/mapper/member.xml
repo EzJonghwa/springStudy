@@ -28,4 +28,33 @@
 	
 	
 	</update>
+	
+	
+	<!-- ResultMap 정의-->
+	<resultMap id="QuestionMap" type="com.future.my.member.vo.QuestionVO">
+		<id property="qId" column="q_id" />
+		<result property="qContent" column="q_content" />
+		<result property="qCategory" column="q_category" />
+		<collection property="options" ofType="com.future.my.member.vo.OptionVO">
+			<id property="oId" column="o_id" />
+			<result property="oContent" column="o_content" />
+		</collection>
+	</resultMap>
+	<select id="getSurvey" resultMap="QuestionMap">
+			SELECT a.q_id
+			     , a.q_content
+			     , a.q_category
+			     , b.o_id
+			     , b.o_content
+			     
+			FROM questions a 
+			    ,q_options b
+			WHERE a.q_id = b.q_id
+			ORDER BY a.q_id, b.o_id
+	</select>
+	
+
+	
+	
+	
 </mapper>

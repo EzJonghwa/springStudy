@@ -24,6 +24,7 @@ import com.future.my.common.service.CodeService;
 import com.future.my.common.vo.CodeVO;
 import com.future.my.member.service.MemberService;
 import com.future.my.member.vo.MemberVO;
+import com.future.my.member.vo.QuestionVO;
 
 @Controller
 public class MemberController {
@@ -145,6 +146,12 @@ public class MemberController {
 		
 		return "member/test";
 	}
-		
+	@RequestMapping("/survey")
+	public String survey(Model model) {
+		ArrayList<QuestionVO> qList = memberService.getSurvey();
+		System.out.println(qList);
+		model.addAttribute("qList", qList);
+		return "member/survey";
+	}
 	
 }
